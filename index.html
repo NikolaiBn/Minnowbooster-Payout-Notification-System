@@ -7,10 +7,12 @@
   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
   crossorigin="anonymous"></script>
       <script>
+      var profit;
+      var amount;
         console.log('Lets check mentions!')
         // Tutorial 05 - @mention Bot
         const ACCOUNT_NAME = 'minnowbooster'
-        steem.api.setOptions({ url: 'wss://rpc.buildteam.io' });
+        steem.api.setOptions({ url: 'https://api.steemit.com' });
         steem.api.streamTransactions('head', function(err, result) {
           let txType = result.operations[0][0]
           let txData = result.operations[0][1]
@@ -28,14 +30,15 @@
           console.log('SBD Price' + response[o].price_usd);
         }
         function getPriceFeed(){
-          $.ajax({
-            url: 'https://api.coinmarketcap.com/v1/ticker/bitcoin',
-            methog: 'GET',
-            crossOrigin: true,
-            dataType: 'jsonp;',
-            success: handleData
-          });
+          $.getJSON('https://api.coinmarketcap.com/v1/ticker/steem-dollars/', function(data) {
+    var price = data[0].price_usd;
+    price = Number(price)
+    var amount = Number (amount);
+    profit = amount*price;
+    console.log('Current SBD_Price:' + price + 'Amount: ' + amount + 'Profit: ' + profit+ ' USD');
+});
         }
+
         function checkTransaction(txType,txData) {
           if(txType == 'transfer') {
             console.log('CHECKING TX')
@@ -45,6 +48,7 @@
             if(txData.from == 'minnowbooster'){
             console.log (`Hey! Looks like @${txData.to} just got a payout from @${txData.from}`);
             console.log (txData)
+            amount = txData.amount;
             }
 
             return (txData.from == 'minnowbooster')
