@@ -1,0 +1,51 @@
+<html>
+    <head>
+    <title>Bot's in Steem-js 5</title>
+      <script src="https://cdn.steemjs.com/lib/latest/steem.min.js"></script>
+      <script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+      <script>
+        console.log('Lets check mentions!')
+        // Tutorial 05 - @mention Bot
+        const ACCOUNT_NAME = 'minnowbooster'
+        steem.api.setOptions({ url: 'wss://rpc.buildteam.io' });
+        steem.api.streamTransactions('head', function(err, result) {
+          let txType = result.operations[0][0]
+          let txData = result.operations[0][1]
+          let includesMention = checkTransaction(txType,txData)
+          if (includesMention) {
+            console.log('MENTION FOUND: ', txData)
+            sendEmail(txData)
+          }
+        });
+        function checkTransaction(txType,txData) {
+          if(txType == 'transfer') {
+            console.log('CHECKING TX')
+            console.log('PROCESSING: ','from:' + txData.from, 'to: ' + txData.to)
+            let sender = txData.from;
+            let mentionUsername = '@' + ACCOUNT_NAME;
+            if(txData.from == 'minnowbooster'){
+            console.log (`Hey! Looks like @${txData.to} just got a payout from @${txData.from}`);
+            console.log (txData)
+            }
+
+            return (txData.from == 'minnowbooster')
+          }
+        }
+        function sendEmail(txData){
+          console.log('SENDING EMAIL',  )
+          $.ajax({
+              url: 'https://formspree.io/nickb1893@gmail.com',
+              method: 'POST',
+              data: { message: `Hey! Looks like @${txData.to} just got a payout from @${txData.from}` },
+              dataType: 'json'
+          });
+        }
+      </script>
+    </head>
+    <body></body>
+</html>
+    <body>Look In The Console</body>
+</html>
