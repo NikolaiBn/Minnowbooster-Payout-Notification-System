@@ -17,7 +17,7 @@
           let includesMention = checkTransaction(txType,txData)
           if (includesMention) {
             console.log('MENTION FOUND: ', txData)
-            getPriceFeed();
+            
             sendEmail(txData)
           }
         });
