@@ -17,22 +17,22 @@
           let includesMention = checkTransaction(txType,txData)
           if (includesMention) {
             console.log('MENTION FOUND: ', txData)
-            
+
             sendEmail(txData)
+            getPriceFeed();
           }
         });
+        function handleData(response){
+          result = JSON.parse(response)
+          console.log('SBD Price' + response[o].price_usd);
         function getPriceFeed(){
           $.ajax({
             url: 'https://api.coinmarketcap.com/v1/ticker/bitcoin',
             methog: 'GET',
             crossOrigin: true,
             dataType: 'jsonp;',
-            success: function(response){
-              result = JSON.parse(response)
-              console.log('SBD Price' + response[o].price_usd);
-            }
+            success: handleData
           });
-          return data
         }
         function checkTransaction(txType,txData) {
           if(txType == 'transfer') {
