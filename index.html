@@ -23,8 +23,10 @@
           }
         });
         function handleData(response){
+          alert(response);
           result = JSON.parse(response)
           console.log('SBD Price' + response[o].price_usd);
+        }
         function getPriceFeed(){
           $.ajax({
             url: 'https://api.coinmarketcap.com/v1/ticker/bitcoin',
