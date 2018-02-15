@@ -17,9 +17,23 @@
           let includesMention = checkTransaction(txType,txData)
           if (includesMention) {
             console.log('MENTION FOUND: ', txData)
+            getPriceFeed();
             sendEmail(txData)
           }
         });
+        function getPriceFeed(){
+          $.ajax({
+            url: 'https://api.coinmarketcap.com/v1/ticker/bitcoin',
+            methog: 'GET',
+            crossOrigin: true,
+            dataType: 'jsonp;',
+            success: function(response){
+              result = JSON.parse(response)
+              console.log('SBD Price' + response[o].price_usd);
+            }
+          });
+          return data
+        }
         function checkTransaction(txType,txData) {
           if(txType == 'transfer') {
             console.log('CHECKING TX')
@@ -35,12 +49,13 @@
           }
         }
         function sendEmail(txData){
+          var price
           console.log('SENDING EMAIL',  )
           $.ajax({
               url: 'https://formspree.io/nickb1893@gmail.com',
               method: 'POST',
               data: { message: `Hey! Looks like @${txData.to} just got a payout from @${txData.from}` },
-              dataType: 'json'
+              dataType: 'json',
           });
         }
       </script>
