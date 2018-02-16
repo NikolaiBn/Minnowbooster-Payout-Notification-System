@@ -9,7 +9,7 @@
       <script>
       var profit;
       var amount;
-        console.log('Lets check mentions!')
+        console.log('Checking Transactions for transfer')
         // Tutorial 05 - @mention Bot
         const ACCOUNT_NAME = 'minnowbooster'
         steem.api.setOptions({ url: 'https://api.steemit.com' });
@@ -47,7 +47,7 @@
             if(txData.from == 'minnowbooster'){
             console.log (`Hey! Looks like @${txData.to} just got a payout from @${txData.from}`);
             console.log (txData)
-            let ama = Number(am.match( /\d+/ ))
+            let ama = Number(am.match( /[\d|,|.|e|E|\+]+/g ))
             console.log (ama)
             }
 
