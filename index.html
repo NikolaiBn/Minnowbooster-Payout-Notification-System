@@ -41,11 +41,13 @@
           if(txType == 'transfer') {
             console.log('PROCESSING: ','from:' + txData.from, 'to: ' + txData.to)
             amount = txData.amount;
+            let am = txData.amount;
             let sender = txData.from;
             let mentionUsername = '@' + ACCOUNT_NAME;
             if(txData.from == 'minnowbooster'){
             console.log (`Hey! Looks like @${txData.to} just got a payout from @${txData.from}`);
             console.log (txData)
+            console.log (am)
             }
 
             return (txData.from == 'minnowbooster')
