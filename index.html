@@ -18,8 +18,6 @@
           let txData = result.operations[0][1]
           let includesMention = checkTransaction(txType,txData)
           if (includesMention) {
-            console.log('MENTION FOUND!')
-
             sendEmail(txData)
             getPriceFeed();
           }
@@ -30,7 +28,7 @@
     var price = data[0].price_usd;
     price = Number(price)
     profit = amountFloat*price;
-    console.log('Pricefeed:' + price.toFixed(2) + ' (USD/SBD) // Amount: ' + amountFloat + ' SBD // Profit: $' + profit.toFixed(2)+ ' USD');
+    console.log('Pricefeed: ' + price.toFixed(2) + ' (USD/SBD) // Amount: ' + amountFloat + ' SBD // Profit: $' + profit.toFixed(2)+ ' USD');
 });
         }
 
@@ -40,6 +38,7 @@
             let sender = txData.from;
             let mentionUsername = '@' + ACCOUNT_NAME;
             if(txData.from == 'minnowbooster'){
+            console.log('Transfer identified!')
             console.log (`Hey! Looks like @${txData.to} just got a payout from @${txData.from}`);
             console.log (txData)
             amountFloat = Number(txData.amount.match( /[\d|,|.|e|E|\+]+/g ))
