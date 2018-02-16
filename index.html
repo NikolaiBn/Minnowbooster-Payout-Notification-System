@@ -8,7 +8,7 @@
   crossorigin="anonymous"></script>
       <script>
       var profit;
-      var amount;
+      var amountFloat;
         console.log('Checking Transactions for transfer')
         // Tutorial 05 - @mention Bot
         const ACCOUNT_NAME = 'minnowbooster'
@@ -31,24 +31,21 @@
     console.log('checking before price:' + typeof price);
       console.log('checking before amount:' + typeof amount);
     price = Number(price)
-    amount = Number (amount);
-    profit = amount*price;
-    console.log('Current SBD_Price:' + price + 'Amount: ' + amount + 'Profit: ' + profit+ ' USD');
+    profit = amountFloat*price;
+    console.log('Current SBD_Price:' + price + 'Amount: ' + amountFloat + 'Profit: ' + profit+ ' USD');
 });
         }
 
         function checkTransaction(txType,txData) {
           if(txType == 'transfer') {
             console.log('PROCESSING: ','from:' + txData.from, 'to: ' + txData.to)
-            amount = txData.amount;
-            let am = txData.amount;
             let sender = txData.from;
             let mentionUsername = '@' + ACCOUNT_NAME;
             if(txData.from == 'minnowbooster'){
             console.log (`Hey! Looks like @${txData.to} just got a payout from @${txData.from}`);
             console.log (txData)
-            let ama = Number(am.match( /[\d|,|.|e|E|\+]+/g ))
-            console.log (ama)
+            amountFloat = Number(txData.amount.match( /[\d|,|.|e|E|\+]+/g ))
+            console.log (amountFloat)
             }
 
             return (txData.from == 'minnowbooster')
