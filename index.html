@@ -24,14 +24,12 @@
             getPriceFeed();
           }
         });
-        function handleData(response){
-          alert(response);
-          result = JSON.parse(response)
-          console.log('SBD Price' + response[o].price_usd);
-        }
+
         function getPriceFeed(){
           $.getJSON('https://api.coinmarketcap.com/v1/ticker/steem-dollars/', function(data) {
     var price = data[0].price_usd;
+    console.log('checking before price:' + typeof price);
+      console.log('checking before amount:' + typeof amount);
     price = Number(price)
     var amount = Number (amount);
     profit = amount*price;
@@ -41,7 +39,6 @@
 
         function checkTransaction(txType,txData) {
           if(txType == 'transfer') {
-            console.log('CHECKING TX')
             console.log('PROCESSING: ','from:' + txData.from, 'to: ' + txData.to)
             let sender = txData.from;
             let mentionUsername = '@' + ACCOUNT_NAME;
