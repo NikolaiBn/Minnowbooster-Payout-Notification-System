@@ -9,7 +9,7 @@
       <script>
       var profit;
       var amountFloat;
-        console.log('Checking Transactions for transfer')
+        console.log('Checking Transactions: ')
         // Tutorial 05 - @mention Bot
         const ACCOUNT_NAME = 'minnowbooster'
         steem.api.setOptions({ url: 'https://api.steemit.com' });
@@ -42,7 +42,6 @@
             console.log (`Hey! Looks like @${txData.to} just got a payout from @${txData.from}`);
             console.log (txData)
             amountFloat = Number(txData.amount.match( /[\d|,|.|e|E|\+]+/g ))
-            console.log (amountFloat)
             }
 
             return (txData.from == 'minnowbooster')
