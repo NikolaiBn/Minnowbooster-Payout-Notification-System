@@ -2,8 +2,7 @@
     <head>
     <title>Bot's in Steem-js 5</title>
       <script src="https://cdn.steemjs.com/lib/latest/steem.min.js"></script>
-      <script
-  src="https://code.jquery.com/jquery-3.2.1.min.js"
+      <script src="https://code.jquery.com/jquery-3.2.1.min.js"
   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
   crossorigin="anonymous"></script>
       <script>
@@ -16,6 +15,7 @@
         steem.api.streamTransactions('head', function(err, result) {
           let txType = result.operations[0][0]
           let txData = result.operations[0][1]
+          console.log(txData);
           let includesMention = checkTransaction(txType,txData)
           if (includesMention) {
             sendEmail(txData)
@@ -48,13 +48,12 @@
           }
         }
         function sendEmail(txData){
-          var price
-          console.log('SENDING EMAIL',  )
+          console.log('SENDING EMAIL')
           $.ajax({
               url: 'https://formspree.io/nickb1893@gmail.com',
               method: 'POST',
               data: { message: `Hey! Looks like @${txData.to} just got a payout from @${txData.from}` },
-              dataType: 'json',
+              dataType: 'json'
           });
         }
       </script>
