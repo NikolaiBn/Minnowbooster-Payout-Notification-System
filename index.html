@@ -17,6 +17,7 @@
           let txData = result.operations[0][1]
           console.log('TXTYPE: ', txType);
           console.log('TXDATA: ',txData);
+          console.log('JSON: ', txData.custom_json)
           let includesMention = checkTransaction(txType,txData)
           if (includesMention) {
             sendEmail(txData)
