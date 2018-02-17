@@ -15,7 +15,8 @@
         steem.api.streamTransactions('head', function(err, result) {
           let txType = result.operations[0][0]
           let txData = result.operations[0][1]
-          console.log(txData);
+          console.log('TXTYPE: ', txType);
+          console.log('TXDATA: ',txData);
           let includesMention = checkTransaction(txType,txData)
           if (includesMention) {
             sendEmail(txData)
