@@ -17,7 +17,7 @@
           let txData = result.operations[0][1]
           if (txType=='comment'){
           console.log('TXDATA: ', txData);
-          console.log('JSON: ', txData.json_metadata);
+          console.log('JSON: ', txData.json_metadata.get('tags'));
         }
           let includesMention = checkTransaction(txType,txData)
           if (includesMention) {
