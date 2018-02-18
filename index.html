@@ -17,7 +17,8 @@
           let txData = result.operations[0][1]
           if (txType=='comment'){
           console.log('TXDATA: ', txData);
-          console.log('JSON: ', txData.json_metadata.tags);
+          let json = JSON.parse(txData.json_metadata)
+          console.log('JSON: ', json.tags);
         }
 //json_metadata: "{\"tags\":[\"photography\",\"castellano\",\"carnaval\",\"travel\",\"venezuela\"],\"image\":[\"https://scontent-mia3-1.xx.fbcdn.net/v/t1.0-9/34806_150380245014518_7920146_n.jpg?oh=d97de59e2fa514dc5ef7aa86f2af0149&oe=5B258830\",\"https://scontent-mia3-1.xx.fbcdn.net/v/t1.0-9/10398493_58079215926_4436441_n.jpg?oh=562702edd38b55144f6623d4d223ff03&oe=5B102CC5\",\"https://scontent-mia3-1.xx.fbcdn.net/v/t1.0-9/10398493_58079230926_607391_n.jpg?oh=2ef2e0d716593289c3f183fb40bf204c&oe=5B150E82\",\"https://scontent-mia3-1.xx.fbcdn.net/v/t1.0-9/165546_150382271680982_3329837_n.jpg?oh=43261d642c37d2cda6544f630d3c5def&oe=5B11186E\",\"https://scontent-mia3-1.xx.fbcdn.net/v/t1.0-9
 
